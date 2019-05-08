@@ -1,0 +1,30 @@
+---
+title: "Kenny has stated"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+ library(shiny) 
+
+quotes <- read.csv("quotes.csv", stringsAsFactors = FALSE)
+quote <- sample_n(quotes,1)
+
+# actionButton("button", "An action button")
+
+```
+
+```{r, echo=FALSE}
+
+renderText(paste(p()))
+
+```
+
+```{r echo = FALSE}
+inputPanel(actionButton("button", "New Quote"))
+
+p <- eventReactive(input$button, {sample_n(quotes,1)})
+
+
+```
